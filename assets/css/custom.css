@@ -93,7 +93,7 @@ ul.examples {
   @apply max-w-2xl mx-auto;
 
   .stats {
-    @apply mb-8 rounded-lg bg-white shadow-lg grid grid-cols-3;
+    @apply mb-8 rounded-lg bg-white shadow-lg grid grid-cols-2;
 
     .stat {
       @apply p-6 text-center;
