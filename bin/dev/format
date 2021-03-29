@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+set -e
+
+file=$1
+
+get_abs_filename() {
+  # $1 : relative filename
+  if [ -d "$(dirname "$1")" ]; then
+    echo "$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
+  fi
+}
+
+if [[ -z "$file" ]]; then
+  echo "Usage: $0 <file>"
+  exit 1
+fi
+
+case $file in
+*.js | *.json)
+  prettier_path="assets/node_modules/.bin/prettier"
+  if command -v $prettier_path >/dev/null; then
+    output=$(mktemp)
+    $prettier_path --config assets/.prettierrc "$file" >"$output"
+    mv "$output" "$file"
+  else
+    echo "add prettier to package.json via: npm install prettier --save-dev --prefix assets"
+    exit 1
+  fi
+  ;;
+
+*.yaml | *.yml)
+  output=$(mktemp)
+  yq read --prettyPrint "$file" >"$output"
+  mv "$output" "$file"
+  ;;
+
+*.ex | *.exs)
+  mix format "$file"
+  ;;
+
+*.sh | */bin/*)
+  shfmt -i 2 -w "$file"
+  ;;
+esac
