@@ -18,6 +18,7 @@ defmodule PlaygroundWeb.Router do
     pipe_through :browser
 
     live "/", PageLive, :index
+    live "/kumete-stats", KumeteStatsLive
   end
 
   # Other scopes may use custom stacks.

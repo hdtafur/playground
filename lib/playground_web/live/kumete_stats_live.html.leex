@@ -1,0 +1,19 @@
+<h1 data-role="dashboard-name">Kumete Stats Dashboard</h1>
+<div id="dashboard">
+  <div class="stats">
+    <div class="stat">
+      <span data-role="events-count-value" class="value"><%= @events_count %></span>
+      <span data-role="events-count-name" class="name"># of events</span>
+    </div>
+
+    <div class="stat">
+      <span data-role="average-response-time-value" class="value"><%= @average_response_time %></span>
+      <span data-role="average-response-time-name" class="name">Avg response time (ms)</span>
+    </div>
+  </div>
+
+  <button phx-click="refresh">
+    <img src="images/refresh.svg">
+    Refresh
+  </button>
+</div>
